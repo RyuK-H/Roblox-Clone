@@ -2,7 +2,13 @@ import React from "react";
 
 import "./GameCard.scss";
 
-function GameCard() {
+interface GameCardProps {
+  name: string;
+  percent: string;
+  players: string;
+}
+
+function GameCard(props: GameCardProps) {
   return (
     <li className="list-item game-card">
       <div className="game-card-container">
@@ -12,13 +18,15 @@ function GameCard() {
             src="https://t6.rbxcdn.com/9ef7925958575537763f47f8ce8ec3d6"
           />
         </div>
-        <div className="game-card-name game-name-title">아스널</div>
+        <div className="game-card-name game-name-title">{props.name}</div>
         <div className="game-card-info">
           <span className="info-label icon-votes-gray" />
-          <span className="info-label vote-percentage-label">88%</span>
+          <span className="info-label vote-percentage-label">
+            {props.percent}
+          </span>
           <span className="info-label icon-playing-counts-gray" />
-          <span className="info-label playing-counts-label" title="30896">
-            30.9K
+          <span className="info-label playing-counts-label">
+            {props.players}
           </span>
         </div>
       </div>
