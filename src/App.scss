@@ -1,0 +1,76 @@
+.game-card-container {
+  position: relative;
+  border-radius: 3px;
+  float: left;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.game-card-thumb-container {
+  height: 150px;
+  width: 150px;
+  display: inline-block;
+  border-radius: 8px;
+}
+
+.game-card-thumb {
+  overflow: hidden;
+  margin: auto;
+}
+
+.game-card-name {
+  margin-bottom: 4px;
+  padding: 0;
+  line-height: 1.4em;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.game-card-title {
+  max-height: 45px;
+}
+
+.game-card-info {
+  line-height: 1.4em;
+  position: relative;
+  margin: 0;
+  bottom: 6px;
+  width: 100%;
+  color: rgba(0,0,0,.6);
+}
+
+.info-label {
+  color: rgba(0,0,0,.6);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.icon-votes-gray {
+  background-image: url("images/icons.svg");
+  background-position: 0 32px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.vote-percentage-label {
+  padding: 0 12px 0 3px;
+}
+
+.icon-playing-counts-gray {
+  background-image: url("images/icons.svg");
+  background-position: 0 16px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.playing-counts-label {
+  padding: 0 12px 0 3px;
+}

@@ -1,25 +1,25 @@
 import React from "react";
 
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="game-card-container">
+      <div className="game-card-thumb-container">
+        <img
+          className="game-card-thumb"
+          src="https://t6.rbxcdn.com/9ef7925958575537763f47f8ce8ec3d6"
+        />
+      </div>
+      <div className="game-card-name game-name-title">아스널</div>
+      <div className="game-card-info">
+        <span className="info-label icon-votes-gray" />
+        <span className="info-label vote-percentage-label">88%</span>
+        <span className="info-label icon-playing-counts-gray" />
+        <span className="info-label playing-counts-label" title="30896">
+          30.9K
+        </span>
+      </div>
     </div>
   );
 }
