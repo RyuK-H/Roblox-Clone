@@ -1,7 +1,7 @@
 import React from "react";
 
-import { GameInfoData } from "../constants/interfaces";
 import GameCard from "./GameCard";
+import { GameInfoData } from "../constants/interfaces";
 import "./GameList.scss";
 
 interface GameListProps {
@@ -15,37 +15,28 @@ function GameList(props: GameListProps) {
     return `${Math.floor((game.totalUpVotes / totalEvaluation) * 100)}%`;
   };
 
-  function abbreviateNumber(value: number) {
-    let newValue = value.toString();
-    if (value >= 1000) {
-      const suffixes = ["", "k", "m", "b", "t"];
-      const suffixNum = Math.floor(("" + value).length / 3);
-      let shortValue = 0;
-      for (let precision = 2; precision >= 1; precision--) {
-        shortValue = parseFloat(
-          (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value)
-            .toPrecision(precision)
-            .toString()
-        );
-        const dotLessShortValue = (shortValue + "").replace(
-          /[^a-zA-Z 0-9]+/g,
-          ""
-        );
-        if (dotLessShortValue.length <= 2) {
-          break;
-        }
-      }
-      if (shortValue % 1 != 0) shortValue = Number(shortValue.toFixed(1));
-      newValue = shortValue + suffixes[suffixNum];
+  const abbreviateNumber = (num: number) => {
+    if (num === 0) {
+      return "0";
     }
-    return newValue;
-  }
+
+    let b = num.toPrecision(2).split("e"),
+      k =
+        b.length === 1
+          ? 0
+          : Math.floor(Math.min(Number(b[1].slice(1)), 14) / 3),
+      c = k < 1 ? num : Number((num / Math.pow(10, k * 3)).toFixed(1)),
+      d = c < 0 ? c : Math.abs(c), // enforce -0 is 0
+      e = d + ["", "K", "M", "B", "T"][k]; // append power
+    return e.toString();
+  };
 
   return (
     <ul className="hlist game-tile-list">
       {props.GameList.map((game: GameInfoData) => {
         return (
           <GameCard
+            key={game.imageToken}
             name={game.name}
             percent={calcThumbsUp(game)}
             players={abbreviateNumber(game.playerCount)}
