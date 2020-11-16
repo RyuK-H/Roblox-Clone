@@ -1,3 +1,14 @@
+.game-card {
+  float: none;
+  width: 150px;
+  height: 240px;
+  padding: 0 14px 0 0;
+  display: inline-block;
+  margin-bottom: 12px;
+  vertical-align: top;
+  white-space: normal;
+}
+
 .game-card-container {
   position: relative;
   border-radius: 3px;
@@ -13,12 +24,12 @@
   height: 150px;
   width: 150px;
   display: inline-block;
-  border-radius: 8px;
 }
 
 .game-card-thumb {
   overflow: hidden;
   margin: auto;
+  border-radius: 8px;
 }
 
 .game-card-name {
@@ -50,7 +61,7 @@
 }
 
 .icon-votes-gray {
-  background-image: url("images/icons.svg");
+  background-image: url("../images/icons.svg");
   background-position: 0 32px;
   width: 16px;
   height: 16px;
@@ -63,7 +74,7 @@
 }
 
 .icon-playing-counts-gray {
-  background-image: url("images/icons.svg");
+  background-image: url("../images/icons.svg");
   background-position: 0 16px;
   width: 16px;
   height: 16px;
