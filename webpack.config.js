@@ -43,7 +43,7 @@ module.exports = {
         loader: "source-map-loader",
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|ico)$/i,
         loader: "file-loader",
         options: {
           name: "[path][name].[ext]",
@@ -85,13 +85,12 @@ module.exports = {
   ],
   devServer: {
     proxy: {
-      "/api": {
+      "/v1/**": {
         target: "https://thumbnails.roblox.com",
         changeOrigin: true,
       },
     },
     contentBase: path.join(__dirname, "dist"),
-    public: "px-dev.nexon.com",
     port: 3000,
     hot: true,
     inline: true,

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { action, computed, observable } from "mobx";
+import { action, observable } from "mobx";
 import { observer } from "mobx-react";
 import axios from "axios";
 
@@ -36,17 +36,11 @@ interface ThumbnailResponse {
 export default class MainPage extends Component {
   @observable categories: GameInfoData[] = observable([]);
   @observable test = 1;
-  @observable start = Date.now();
-  @observable current = Date.now();
-
-  @computed get elapsedTime() {
-    return this.current - this.start + "milliseconds";
-  }
 
   @action tick() {
-    this.current = Date.now();
+    this.test++;
 
-    console.error(this.current);
+    console.error(this.test);
   }
 
   // @action setImageUrl(index: number, URL: string) {
@@ -74,7 +68,7 @@ export default class MainPage extends Component {
 
     await axios
       .get(
-        `/v1/games/icons?universeIds=${universIds}&returnPolicy=PlaceHolder&size=150x150&format=jpeg`
+        `v1/games/icons?universeIds=${universIds}&returnPolicy=PlaceHolder&size=150x150&format=jpeg`
       )
       .then((response) => {
         response.data.data.forEach(
@@ -92,7 +86,7 @@ export default class MainPage extends Component {
     console.warn("!", this.test);
     return (
       <div>
-        <div>{this.elapsedTime}</div>
+        <div>{this.test}</div>
         <button onClick={() => this.tick()}>dddddddd</button>
         <GameList GameList={this.categories} />
         {/* <GameList GameList={category_2.games} />
