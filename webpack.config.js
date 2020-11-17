@@ -25,10 +25,11 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.scss$/,
         use: [
           /* devMode ? 'style-loader' : */
           // MiniCssExtractPlugin.loader,
+          "style-loader",
           "css-loader",
           "sass-loader",
         ],
