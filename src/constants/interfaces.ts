@@ -12,4 +12,5 @@ export interface GameInfoData {
   totalDownVotes: number;
   totalUpVotes: number;
   universeId: number;
+  imageUrl: string;
 }

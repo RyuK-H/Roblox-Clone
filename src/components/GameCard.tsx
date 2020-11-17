@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react";
 
 import "./GameCard.scss";
 
@@ -6,17 +7,16 @@ interface GameCardProps {
   name: string;
   percent: string;
   players: string;
+  thumbnail: string;
 }
 
 function GameCard(props: GameCardProps) {
+  console.error("?");
   return (
     <li className="list-item game-card">
       <div className="game-card-container">
         <div className="game-card-thumb-container">
-          <img
-            className="game-card-thumb"
-            src="https://t6.rbxcdn.com/9ef7925958575537763f47f8ce8ec3d6"
-          />
+          <img className="game-card-thumb" src={props.thumbnail} />
         </div>
         <div className="game-card-name game-name-title">{props.name}</div>
         <div className="game-card-info">
@@ -34,4 +34,4 @@ function GameCard(props: GameCardProps) {
   );
 }
 
-export default GameCard;
+export default observer(GameCard);
