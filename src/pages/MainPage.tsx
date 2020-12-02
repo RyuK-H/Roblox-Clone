@@ -61,7 +61,7 @@ export default class MainPage extends React.Component {
 
     await axios
       .get(
-        `v1/games/icons?universeIds=${universIds}&returnPolicy=PlaceHolder&size=150x150&format=jpeg`
+        `https://cors-anywhere.herokuapp.com/https://thumbnails.roblox.com/v1/games/icons?universeIds=${universIds}&returnPolicy=PlaceHolder&size=150x150&format=jpeg`
       )
       .then((response) => {
         this.categories = response.data.data.map(

@@ -85,12 +85,6 @@ module.exports = {
     ]),
   ],
   devServer: {
-    proxy: {
-      "/v1/**": {
-        target: "https://thumbnails.roblox.com",
-        changeOrigin: true,
-      },
-    },
     contentBase: path.join(__dirname, "dist"),
     port: 3000,
     hot: true,
