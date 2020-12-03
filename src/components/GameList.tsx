@@ -1,5 +1,4 @@
 import React from "react";
-import { observer } from "mobx-react";
 
 import GameCard from "./GameCard";
 import { GameInfoData } from "../constants/interfaces";
@@ -49,4 +48,4 @@ function GameList(props: GameListProps) {
   );
 }
 
-export default observer(GameList);
+export default GameList;

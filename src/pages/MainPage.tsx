@@ -66,7 +66,6 @@ export const MainPage = () => {
         );
 
         setCategories([...categoriesImages]);
-        console.log(categoriesImages);
         // response.data.data.forEach(
         //   (element: ThumbnailResponse, index: number) => {
         //     this.setImageUrl(index, element.imageUrl);

@@ -1,5 +1,4 @@
 import React from "react";
-import { observer } from "mobx-react";
 
 import "./GameCard.scss";
 
@@ -40,4 +39,4 @@ function GameCard(props: GameCardProps) {
   );
 }
 
-export default observer(GameCard);
+export default GameCard;
