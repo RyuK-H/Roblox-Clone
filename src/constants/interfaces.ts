@@ -1,3 +1,8 @@
+export interface Category {
+  key: string;
+  games: GameInfoData[];
+}
+
 export interface GameInfoData {
   creatorId: number;
   creatorName: string;
@@ -11,6 +16,6 @@ export interface GameInfoData {
   price: number;
   totalDownVotes: number;
   totalUpVotes: number;
-  universeId: number;
+  universeId: string;
   imageUrl: string;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import GameList from "../components/GameList";
-import { GameInfoData } from "../constants/interfaces";
+import { GameInfoData, Category } from "../constants/interfaces";
 
 const category_1 = require("../TempData/category_1.json");
 const category_2 = require("../TempData/category_2.json");
@@ -24,6 +24,28 @@ const category_17 = require("../TempData/category_17.json");
 const category_18 = require("../TempData/category_18.json");
 const category_19 = require("../TempData/category_19.json");
 
+const categoriesJSON: Category[] = [
+  { key: "1", games: category_1.games },
+  { key: "2", games: category_2.games },
+  { key: "3", games: category_3.games },
+  { key: "4", games: category_4.games },
+  { key: "5", games: category_5.games },
+  { key: "6", games: category_6.games },
+  { key: "7", games: category_7.games },
+  { key: "8", games: category_8.games },
+  { key: "9", games: category_9.games },
+  { key: "10", games: category_10.games },
+  { key: "11", games: category_11.games },
+  { key: "12", games: category_12.games },
+  { key: "13", games: category_13.games },
+  { key: "14", games: category_14.games },
+  { key: "15", games: category_15.games },
+  { key: "16", games: category_16.games },
+  { key: "17", games: category_17.games },
+  { key: "18", games: category_18.games },
+  { key: "19", games: category_19.games },
+];
+
 interface ThumbnailResponse {
   targetId: number;
   state: string;
@@ -31,33 +53,34 @@ interface ThumbnailResponse {
 }
 
 export const MainPage = () => {
-  let [categories, setCategories] = useState<GameInfoData[]>(category_1.games);
+  let [categories, setCategories] = useState<Category[]>(categoriesJSON);
 
   useEffect(() => {
-    getThumbnailImage();
+    for (let i = 0; i < categories.length; i++) {
+      getThumbnailImage(i);
+    }
   }, []);
 
-  // const setImageUrl = (index: number, URL: string) => {
-  //   categories[index].imageUrl = URL;
-  // };
-
-  const getThumbnailImage = async () => {
+  const getThumbnailImage = async (categoryNumber: number) => {
     let universIds = "";
 
-    for (let n in category_1.games) {
-      if (n === "0") universIds = category_1.games[n].universeId;
-      else universIds = universIds + `,${category_1.games[n].universeId}`;
+    for (let n in categories[categoryNumber].games) {
+      if (n === "0")
+        universIds = categories[categoryNumber].games[n].universeId;
+      else
+        universIds =
+          universIds + `,${categories[categoryNumber].games[n].universeId}`;
     }
 
-    await axios
+    axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://thumbnails.roblox.com/v1/games/icons?universeIds=${universIds}&returnPolicy=PlaceHolder&size=150x150&format=jpeg`
       )
       .then((response) => {
-        let categoriesImages = response.data.data.map(
+        categories[categoryNumber].games = response.data.data.map(
           (element: ThumbnailResponse, index: number) => {
             const data: GameInfoData = {
-              ...categories[index],
+              ...categories[categoryNumber].games[index],
               imageUrl: element.imageUrl,
             };
 
@@ -65,37 +88,15 @@ export const MainPage = () => {
           }
         );
 
-        setCategories([...categoriesImages]);
-        // response.data.data.forEach(
-        //   (element: ThumbnailResponse, index: number) => {
-        //     this.setImageUrl(index, element.imageUrl);
-        //     // this.categories[index].imageUrl = element.imageUrl;
-        //   }
-        // );
+        setCategories([...categories]);
       });
   };
 
   return (
     <>
-      <GameList GameList={categories} />
-      <GameList GameList={category_2.games} />
-      <GameList GameList={category_3.games} />
-      <GameList GameList={category_4.games} />
-      <GameList GameList={category_5.games} />
-      <GameList GameList={category_6.games} />
-      <GameList GameList={category_7.games} />
-      <GameList GameList={category_8.games} />
-      <GameList GameList={category_9.games} />
-      <GameList GameList={category_10.games} />
-      <GameList GameList={category_11.games} />
-      <GameList GameList={category_12.games} />
-      <GameList GameList={category_13.games} />
-      <GameList GameList={category_14.games} />
-      <GameList GameList={category_15.games} />
-      <GameList GameList={category_16.games} />
-      <GameList GameList={category_17.games} />
-      <GameList GameList={category_18.games} />
-      <GameList GameList={category_19.games} />
+      {categories.map((category) => {
+        return <GameList key={category.key} GameList={category.games} />;
+      })}
     </>
   );
 };
