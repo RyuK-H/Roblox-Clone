@@ -1,6 +1,4 @@
-import React from "react";
-import { action, observable } from "mobx";
-import { observer } from "mobx-react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import GameList from "../components/GameList";
@@ -32,26 +30,18 @@ interface ThumbnailResponse {
   imageUrl: string;
 }
 
-@observer
-export default class MainPage extends React.Component {
-  @observable categories: GameInfoData[] = [];
+export const MainPage = () => {
+  let [categories, setCategories] = useState<GameInfoData[]>(category_1.games);
 
-  @action setImageUrl(index: number, URL: string) {
-    this.categories[index].imageUrl = URL;
-  }
+  useEffect(() => {
+    getThumbnailImage();
+  }, []);
 
-  constructor(props = {}) {
-    super(props);
+  // const setImageUrl = (index: number, URL: string) => {
+  //   categories[index].imageUrl = URL;
+  // };
 
-    this.categories = category_1.games;
-  }
-
-  componentDidMount() {
-    this.getThumbnailImage();
-  }
-
-  @action
-  getThumbnailImage = async () => {
+  const getThumbnailImage = async () => {
     let universIds = "";
 
     for (let n in category_1.games) {
@@ -64,16 +54,19 @@ export default class MainPage extends React.Component {
         `https://cors-anywhere.herokuapp.com/https://thumbnails.roblox.com/v1/games/icons?universeIds=${universIds}&returnPolicy=PlaceHolder&size=150x150&format=jpeg`
       )
       .then((response) => {
-        this.categories = response.data.data.map(
+        let categoriesImages = response.data.data.map(
           (element: ThumbnailResponse, index: number) => {
             const data: GameInfoData = {
-              ...this.categories[index],
+              ...categories[index],
               imageUrl: element.imageUrl,
             };
 
             return data;
           }
         );
+
+        setCategories([...categoriesImages]);
+        console.log(categoriesImages);
         // response.data.data.forEach(
         //   (element: ThumbnailResponse, index: number) => {
         //     this.setImageUrl(index, element.imageUrl);
@@ -83,29 +76,27 @@ export default class MainPage extends React.Component {
       });
   };
 
-  render() {
-    return (
-      <>
-        <GameList GameList={this.categories} />
-        <GameList GameList={category_2.games} />
-        <GameList GameList={category_3.games} />
-        <GameList GameList={category_4.games} />
-        <GameList GameList={category_5.games} />
-        <GameList GameList={category_6.games} />
-        <GameList GameList={category_7.games} />
-        <GameList GameList={category_8.games} />
-        <GameList GameList={category_9.games} />
-        <GameList GameList={category_10.games} />
-        <GameList GameList={category_11.games} />
-        <GameList GameList={category_12.games} />
-        <GameList GameList={category_13.games} />
-        <GameList GameList={category_14.games} />
-        <GameList GameList={category_15.games} />
-        <GameList GameList={category_16.games} />
-        <GameList GameList={category_17.games} />
-        <GameList GameList={category_18.games} />
-        <GameList GameList={category_19.games} />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <GameList GameList={categories} />
+      <GameList GameList={category_2.games} />
+      <GameList GameList={category_3.games} />
+      <GameList GameList={category_4.games} />
+      <GameList GameList={category_5.games} />
+      <GameList GameList={category_6.games} />
+      <GameList GameList={category_7.games} />
+      <GameList GameList={category_8.games} />
+      <GameList GameList={category_9.games} />
+      <GameList GameList={category_10.games} />
+      <GameList GameList={category_11.games} />
+      <GameList GameList={category_12.games} />
+      <GameList GameList={category_13.games} />
+      <GameList GameList={category_14.games} />
+      <GameList GameList={category_15.games} />
+      <GameList GameList={category_16.games} />
+      <GameList GameList={category_17.games} />
+      <GameList GameList={category_18.games} />
+      <GameList GameList={category_19.games} />
+    </>
+  );
+};
