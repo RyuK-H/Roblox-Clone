@@ -1,7 +1,9 @@
 import React from "react";
+import Slider from "react-slick";
 
 import GameCard from "./GameCard";
 import { GameInfoData } from "../constants/interfaces";
+
 import "./GameList.scss";
 
 interface GameListProps {
@@ -31,8 +33,15 @@ function GameList(props: GameListProps) {
     return e.toString();
   };
 
+  const settings = {
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 4,
+  };
+
   return (
-    <ul className="hlist game-tile-list">
+    // <div className="hlist game-tile-list">
+    <Slider {...settings}>
       {props.GameList.map((game: GameInfoData) => {
         return (
           <GameCard
@@ -44,7 +53,8 @@ function GameList(props: GameListProps) {
           />
         );
       })}
-    </ul>
+    </Slider>
+    // </div>
   );
 }
 

@@ -12,7 +12,7 @@ interface GameCardProps {
 
 function GameCard(props: GameCardProps) {
   return (
-    <li className="list-item game-card">
+    <div className="list-item game-card">
       <div className="game-card-container">
         <div className="game-card-thumb-container">
           {props.thumbnail ? (
@@ -33,7 +33,7 @@ function GameCard(props: GameCardProps) {
           </span>
         </div>
       </div>
-    </li>
+    </div>
   );
 }
 
