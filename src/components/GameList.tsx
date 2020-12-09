@@ -1,9 +1,8 @@
 import React from "react";
-import Slider from "react-slick";
+import LazyLoad from "react-lazyload";
 
-import GameCard from "./GameCard";
 import { GameInfoData } from "../constants/interfaces";
-
+import GameCard from "./GameCard";
 import "./GameList.scss";
 
 interface GameListProps {
@@ -33,28 +32,21 @@ function GameList(props: GameListProps) {
     return e.toString();
   };
 
-  const settings = {
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 4,
-  };
-
   return (
-    // <div className="hlist game-tile-list">
-    <Slider {...settings}>
+    <div className="hlist game-tile-list">
       {props.GameList.map((game: GameInfoData) => {
         return (
-          <GameCard
-            key={game.imageToken}
-            name={game.name}
-            percent={calcThumbsUp(game)}
-            players={abbreviateNumber(game.playerCount)}
-            thumbnail={game.imageUrl}
-          />
+          <LazyLoad key={game.imageToken} height={200} offset={100}>
+            <GameCard
+              name={game.name}
+              percent={calcThumbsUp(game)}
+              players={abbreviateNumber(game.playerCount)}
+              thumbnail={game.imageUrl}
+            />
+          </LazyLoad>
         );
       })}
-    </Slider>
-    // </div>
+    </div>
   );
 }
 
