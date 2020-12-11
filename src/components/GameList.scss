@@ -1,8 +1,27 @@
 .game-tile-list {
-  display: flex;
+  width: 100%;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
+  overflow: hidden;
+}
+
+.slider-container {
+  width: 100%;
+  display: flex;
+}
+
+.button-slider {
+  all: unset;
+  border: 1px solid coral;
+  padding: 0.5em 2em;
+  color: coral;
+  border-radius: 10px;
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: coral;
+    color: #fff;
+  }
 }

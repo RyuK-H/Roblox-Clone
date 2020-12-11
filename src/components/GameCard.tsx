@@ -12,7 +12,7 @@ interface GameCardProps {
 
 function GameCard(props: GameCardProps) {
   return (
-    <div className="list-item game-card">
+    <div className="game-card">
       <div className="game-card-container">
         <div className="game-card-thumb-container">
           {props.thumbnail ? (

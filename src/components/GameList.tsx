@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LazyLoad from "react-lazyload";
 
 import { GameInfoData } from "../constants/interfaces";
@@ -10,6 +10,22 @@ interface GameListProps {
 }
 
 function GameList(props: GameListProps) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slideRef = useRef<HTMLDivElement>(null);
+  const nextSlide = () => {
+    setCurrentSlide(currentSlide + 1);
+  };
+  const prevSlide = () => {
+    setCurrentSlide(currentSlide - 1);
+  };
+
+  useEffect(() => {
+    if (slideRef && slideRef.current !== null) {
+      slideRef.current.style.transition = "all 0.5s ease-in-out";
+      slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
+    }
+  }, [currentSlide]);
+
   const calcThumbsUp = (game: GameInfoData) => {
     const totalEvaluation = game.totalDownVotes + game.totalUpVotes;
 
@@ -33,19 +49,27 @@ function GameList(props: GameListProps) {
   };
 
   return (
-    <div className="hlist game-tile-list">
-      {props.GameList.map((game: GameInfoData) => {
-        return (
-          <LazyLoad key={game.imageToken} height={200} offset={100}>
-            <GameCard
-              name={game.name}
-              percent={calcThumbsUp(game)}
-              players={abbreviateNumber(game.playerCount)}
-              thumbnail={game.imageUrl}
-            />
-          </LazyLoad>
-        );
-      })}
+    <div className="game-tile-list">
+      <div className="slider-container" ref={slideRef}>
+        {props.GameList.map((game: GameInfoData) => {
+          return (
+            <LazyLoad key={game.imageToken} height={200} offset={100}>
+              <GameCard
+                name={game.name}
+                percent={calcThumbsUp(game)}
+                players={abbreviateNumber(game.playerCount)}
+                thumbnail={game.imageUrl}
+              />
+            </LazyLoad>
+          );
+        })}
+      </div>
+      <button className="button-slider" onClick={prevSlide}>
+        Previous Slide
+      </button>
+      <button className="button-slider" onClick={nextSlide}>
+        Next Slide
+      </button>
     </div>
   );
 }
